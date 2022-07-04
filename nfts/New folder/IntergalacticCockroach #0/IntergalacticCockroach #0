@@ -1,0 +1,39 @@
+{
+    "image": "IntergalacticCockroach #0.png",
+    "tokenId": 0,
+    "name": "IntergalacticCockroach # 0",
+    "attributes": [
+        {
+            "trait_type": "Antenna",
+            "value": "Brown"
+        },
+        {
+            "trait_type": "Hair",
+            "value": "Vietnamese Non"
+        },
+        {
+            "trait_type": "Shirt",
+            "value": "Nothing"
+        },
+        {
+            "trait_type": "Skin",
+            "value": "Normal"
+        },
+        {
+            "trait_type": "Background",
+            "value": "Rays"
+        },
+        {
+            "trait_type": "Mouth",
+            "value": "Sewed"
+        },
+        {
+            "trait_type": "Eyes",
+            "value": "Normal"
+        },
+        {
+            "trait_type": "Others",
+            "value": "Nothing"
+        }
+    ]
+}

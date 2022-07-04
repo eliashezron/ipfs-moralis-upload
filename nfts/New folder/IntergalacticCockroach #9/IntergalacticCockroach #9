@@ -1,0 +1,39 @@
+{
+    "image": "IntergalacticCockroach #9.png",
+    "tokenId": 9,
+    "name": "IntergalacticCockroach # 9",
+    "attributes": [
+        {
+            "trait_type": "Antenna",
+            "value": "Blue"
+        },
+        {
+            "trait_type": "Hair",
+            "value": "Vietnamese Non"
+        },
+        {
+            "trait_type": "Shirt",
+            "value": "Nano Suit"
+        },
+        {
+            "trait_type": "Skin",
+            "value": "Rock"
+        },
+        {
+            "trait_type": "Background",
+            "value": "Stars"
+        },
+        {
+            "trait_type": "Mouth",
+            "value": "Smoking Pot"
+        },
+        {
+            "trait_type": "Eyes",
+            "value": "Sad"
+        },
+        {
+            "trait_type": "Others",
+            "value": "Silver Talkie"
+        }
+    ]
+}
