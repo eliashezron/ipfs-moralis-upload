@@ -1,40 +1,43 @@
 const dotenv = require('dotenv')
-const { Readable } = require('stream');
 const pinataSDK = require('@pinata/sdk');
 dotenv.config()
 const pinata = pinataSDK(process.env.API_KEY, process.env.API_SECRET);
 const fs = require("fs");
 
+function pinImage(image){
+    pinata.pinFileToIPFS(image).then((result) => {
+        return (`https://gateway.pinata.cloud/ipfs/${result.IpfsHash}`)
+    }).catch((err) => {
+        //handle error here
+        console.log(err);
+    });
+}
+function pinMetadata(body){
+    pinata.pinJSONTOIPFS(body).then((result)=>{
+        return (`https://gateway.pinata.cloud/ipfs/${result.IpfsHash}`)
+    }).catch((err) => {
+        //handle error here
+        console.log(err);
+    });
+}
 
-let ipfsArray = []
-let promises= []
-
+async function meth(){
 for (let i = 0; i < 11; i++) {
-   promises.push(new Promise((res, rej)=>{
-        fs.readFile(`${__dirname}/nfts/output/IntergalacticCockroach #${i}/IntergalacticCockroach #${i}.png`,(err, data)=>{
-            if(err) rej()
-            ipfsArray.push(
-                data           
-            )
-            res()
-        })
-   }))
-    
-}  
-
-Promise.all(promises).then(()=>{
-    console.log(ipfsArray.length)
-    for (let i = 0; i < ipfsArray.length; i++) {
-        // const stream = Readable.from(ipfsArray[i].toString());
-        const readableStreamForFile = fs.createReadStream(ipfsArray[i].toString('base64'));
-        pinata.pinFileToIPFS(readableStreamForFile).then((result) => {
-            //handle results here
-            console.log(result);
-        }).catch((err) => {
-            //handle error here
-            console.log("error");
-        })
-    }
+   var image = fs.createReadStream(`${__dirname}/nfts/output/IntergalacticCockroach #${i}/IntergalacticCockroach #${i}.png`)
+        fs.readFile(`${__dirname}/nfts/output/IntergalacticCockroach #${i}/IntergalacticCockroach #${i}.json`,(err, data)=>{
+        if(err) rej()
+        let metadata = JSON.parse(data)
+        const body = {
+            image: pinImage(image),
+            tokenId: metadata.tokenId,
+            name: metadata.name,
+            attributes: metadata.attributes
+        }
+        const metadataf = pinMetadata(body)
+        console.log(metadataf)
+        res()
 })
-
-
+}}
+meth()
+  
+ 
