@@ -11,9 +11,9 @@ for (let i = 0; i < 11; i++) {
             if(err) rej()
             let metadata = JSON.parse(data)
             ipfsArray.push({
-                path:`metadata/${i}.json`,
+                path:`${i}`,
                 content: {
-                    image: `https://ipfs.moralis.io:2053/ipfs/QmRB5kMbVe27zcqUEvrY6gZDpJrSAGaFjmEa9sDSrtHUcP/images/${i}.png`,
+                    image: `https://ipfs.moralis.io:2053/ipfs/${process.env.MORALIS_X_API_KEY}/images/${i}.png`,
                     tokenId: metadata.tokenId,
                     name: metadata.name,
                     attributes: metadata.attributes

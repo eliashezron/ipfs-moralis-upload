@@ -22,7 +22,7 @@ Promise.all(promises).then(()=>{
         {
             headers:{
             "accept": "application/json",
-            "X-API-KEY": 'bTyKM0ql1TTNZzVFbIG9VfCOv0w1SX3Bwz9PCm31yTwqnCo7d7MqUj6EeuuONtnX', 
+            "X-API-KEY": `${process.env.MORALI_X_API_KEY}`, 
             "Content-Type": "application/json "
         }}).then((res)=>{
                 console.log(res.data)
