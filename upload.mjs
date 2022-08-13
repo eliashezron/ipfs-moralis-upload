@@ -1,83 +1,32 @@
 // Import the NFTStorage class and File constructor from the 'nft.storage' package
-import { NFTStorage, File } from 'nft.storage'
-
-// The 'mime' npm package helps us set the correct file type on our File objects
+import { NFTStorage, File, Blob } from 'nft.storage'
 import mime from 'mime'
-
-// The 'fs' builtin module on Node.js provides access to the file system
 import fs from 'fs'
-
-// The 'path' module provides helpers for manipulating filesystem paths
 import path from 'path'
+const __dirname = path.resolve()
 
-// Paste your NFT.Storage API key into the quotes:
-const NFT_STORAGE_KEY = 'REPLACE_ME_WITH_YOUR_KEY'
-
-/**
-  * Reads an image file from `imagePath` and stores an NFT with the given name and description.
-  * @param {string} imagePath the path to an image file
-  * @param {string} name a name for the NFT
-  * @param {string} description a text description for the NFT
-  * 
-  */
-const __dirname = path.resolve();
-
-for (i=0, i<=11, i++>) {
-
-
-async function storeNFT(imagePath, name, description) {
-    // load the file from disk
-    const image = await fileFromPath(`${__dirname}/nfts/output/IntergalacticCockroach #${i}/IntergalacticCockroach #${i}.png`)
-    const name = await fileFromPath(`${__dirname}/nfts/output/IntergalacticCockroach #${i}/IntergalacticCockroach #${i}`),
-
-    const __dirname = path.hzeocn;
-    // create a new NFTStorage client using our API key
-    const nftstorage = new NFTStorage({ token: NFT_STORAGE_KEY })
-
-    // call client.store, passing in the image & metadata
-    return nftstorage.store({
-        image,
-    })
-}}
-
-/**
-  * A helper to read a file from a location on disk and return a File object.
-  * Note that this reads the entire file into memory and should not be used for
-  * very large files. 
-  * @param {string} filePath the path to a file to store
-  * @returns {File} a File object containing the file content
-  */
-async function fileFromPath(filePath) {
-    const content = await fs.promises.readFile(filePath)
-    const type = mime.getType(filePath)
-    return new File([content], path.basename(filePath), { type })
+let ipfsArray = []
+let promises= []
+const NFT_STORAGE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGE0MmNiMUVkNUE1M0Q5NTZDODIyQWRmYTREQWQ0ZGM4RkUzQTVERkMiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY2MDM5MDA1OTc0OCwibmFtZSI6ImljYyJ9.PzJ8kwc0E6rh-IBdFEiTQbNA68iZ1Z7M2b9tV00mlrA'
+const client = new NFTStorage({ token: NFT_STORAGE_KEY })
+for (let i = 0; i < 11 ; i++) {
+    promises.push(new Promise((res, rej)=>{
+         fs.readFile(`${__dirname}/nfts/output/IntergalacticCockroach #${i}/IntergalacticCockroach #${i}.png`,(err, data)=>{
+             if(err) rej()
+             ipfsArray.push({
+                 path:`images/${i}.png`,
+                 content: data.toString('base64')
+             })
+             res()
+         })
+    }))
+     
 }
+Promise.all(promises).then(async()=>{
+    const imageFile = new File(ipfsArray, 'nfts', { type: 'image/png' })
+    const cid = await client.storeDirectory([imageFile])
+    console.log(cid)
+
+})
 
 
-/**
- * The main entry point for the script that checks the command line arguments and
- * calls storeNFT.
- * 
- * To simplify the example, we don't do any fancy command line parsing. Just three
- * positional arguments for imagePath, name, and description
- */
-async function main() {
-    const args = process.argv.slice(2)
-    if (args.length !== 3) {
-        console.error(`usage: ${process.argv[0]} ${process.argv[1]} <image-path> <name> <description>`)
-        process.exit(1)
-    }
-
-    const [imagePath, name, description] = args
-    const result = await storeNFT(imagePath, name, description)
-    console.log(result)
-}
-
-// Don't forget to actually call the main function!
-// We can't `await` things at the top level, so this adds
-// a .catch() to grab any errors and print them to the console.
-main()
-  .catch(err => {
-      console.error(err)
-      process.exit(1)
-  })

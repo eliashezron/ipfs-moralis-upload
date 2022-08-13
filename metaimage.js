@@ -4,7 +4,7 @@ const axios = require('axios')
 let ipfsArray = []
 let promises= []
 
-for (let i = 0; i < 11; i++) {
+for (let i = 0; i < ; i++) {
    promises.push(new Promise((res, rej)=>{
         fs.readFile(`${__dirname}/nfts/output/IntergalacticCockroach #${i}/IntergalacticCockroach #${i}.png`,(err, data)=>{
             if(err) rej()
@@ -22,7 +22,7 @@ Promise.all(promises).then(()=>{
         {
             headers:{
             "accept": "application/json",
-            "X-API-KEY": `${process.env.MORALI_X_API_KEY}`, 
+            "X-API-KEY": `bTyKM0ql1TTNZzVFbIG9VfCOv0w1SX3Bwz9PCm31yTwqnCo7d7MqUj6EeuuONtnX`, 
             "Content-Type": "application/json "
         }}).then((res)=>{
                 console.log(res.data)
