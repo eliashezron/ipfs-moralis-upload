@@ -4,7 +4,7 @@ const axios = require('axios')
 let ipfsArray = []
 let promises= []
 
-for (let i = 0; i < ; i++) {
+for (let i = 0; i < 11; i++) {
    promises.push(new Promise((res, rej)=>{
         fs.readFile(`${__dirname}/nfts/output/IntergalacticCockroach #${i}/IntergalacticCockroach #${i}.png`,(err, data)=>{
             if(err) rej()
