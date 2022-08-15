@@ -25,7 +25,7 @@ async function storeAsset(name, description, attributes, picture_path) {
  }
 
  function uploadFolder(){
-    for (let i = 0; i < 11; i++) {
+    for (let i = 0; i < 3; i++) {
         fs.readFile(`${__dirname}/nfts/output/IntergalacticCockroach #${i}/IntergalacticCockroach #${i}.json`,async(err, data)=>{
             if(err) rej()
             let metadata = JSON.parse(data)
@@ -35,3 +35,7 @@ async function storeAsset(name, description, attributes, picture_path) {
  }
 
  uploadFolder()
+
+//  IntergalacticCockroach # 1: ipfs://bafyreidim3rmljot5sigrzrr4fsl36nwmi43vpoxc6a4cdvvmwd24bew5i/metadata.json
+// IntergalacticCockroach # 0: ipfs://bafyreigttjt3vlcuzwuab7galtq7fokhlpg3u423yeovn6iejldmq7vt2e/metadata.json
+// IntergalacticCockroach # 2: ipfs://bafyreidyu7v5lzimb6bnhukto7rvga7zcc4q6ngri5eljfnl66jwqumwyq/metadata.json
