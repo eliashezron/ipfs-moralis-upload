@@ -45,7 +45,7 @@ for (let i = 5000; i < 10000; i++) {
             content: {
               image: `https://ipfs.io/ipfs/bafybeibitwhg65xlrtk6dex6ss5gvubaxpobk5gawxgondsrrctglabnwi/${i}.png`,
               tokenId: metadata.tokenId,
-              name: metadata.name,
+              name: `Intergalactic Cockroach # ${i}`,
               attributes: metadata.attributes,
             },
           })
