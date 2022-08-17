@@ -32,26 +32,21 @@ for (let i = 0; i < 5000; i++) {
 for (let i = 5000; i < 10000; i++) {
   promises.push(
     new Promise((res, rej) => {
-      fs.readFile(
-        `${__dirname}/images/IntergalacticCockroach #${i}/IntergalacticCockroach #${i}`,
-        (err, data) => {
-          if (err) {
-            console.log(err, i)
-          }
-          rej()
-          let metadata = JSON.parse(data)
-          ipfsArray.push({
-            path: `${i}`,
-            content: {
-              image: `https://ipfs.io/ipfs/bafybeibitwhg65xlrtk6dex6ss5gvubaxpobk5gawxgondsrrctglabnwi/${i}.png`,
-              tokenId: metadata.tokenId,
-              name: `Intergalactic Cockroach # ${i}`,
-              attributes: metadata.attributes,
-            },
-          })
-          res()
-        }
+      let data = fs.readFileSync(
+        `${__dirname}/images/IntergalacticCockroach #${i}/IntergalacticCockroach #${i}`
       )
+      let metadata = JSON.parse(data)
+      // console.log("Data for ", i, metadata)
+      ipfsArray.push({
+        path: `${i}`,
+        content: {
+          image: `https://ipfs.io/ipfs/bafybeibitwhg65xlrtk6dex6ss5gvubaxpobk5gawxgondsrrctglabnwi/${i}.png`,
+          tokenId: metadata.tokenId,
+          name: `Intergalactic Cockroach # ${i}`,
+          attributes: metadata.attributes,
+        },
+      })
+      res()
     })
   )
 }
